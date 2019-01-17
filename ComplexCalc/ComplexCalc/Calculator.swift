@@ -23,7 +23,15 @@ class Calculator {
         return count
     }
     
-    func subtract(lhs : Int, rhs : Int) -> {
+    func subtract(lhs : Int, rhs : Int) -> Int {
         return lhs - rhs
+    }
+    
+    func subtract(_ operands : [Int]) -> {
+        var count : Int = 0
+        for operand in operands {
+            count -= operand
+        }
+        return count
     }
 }
