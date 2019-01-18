@@ -23,6 +23,18 @@ class Calculator {
         return count
     }
     
+    func add(lhs : (Int, Int), rhs : (Int, Int)) -> (Int, Int) {
+        return (lhs.0 + rhs.0, lhs.1 + rhs.1)
+    }
+    
+    func add(lhs : [String : Int], rhs : [String: Int]) -> [String: Int] {
+        var result : [String : Int] = ["x" : 0, "y" : 0]
+        for (axis, value) in lhs {
+            result[axis] = value + rhs[axis]!
+        }
+        return result
+    }
+    
     func subtract(lhs : Int, rhs : Int) -> Int {
         return lhs - rhs
     }
@@ -33,6 +45,18 @@ class Calculator {
             count -= operand
         }
         return count
+    }
+    
+    func subtract(lhs : (Int, Int), rhs : (Int, Int)) -> (Int, Int) {
+        return (lhs.0 - rhs.0, lhs.1 - rhs.1)
+    }
+    
+    func subtract(lhs : [String : Int], rhs : [String: Int]) -> [String: Int] {
+        var result : [String : Int] = ["x" : 0, "y" : 0]
+        for (axis, value) in lhs {
+            result[axis] = value - rhs[axis]!
+        }
+        return result
     }
     
     func multiply(lhs : Int, rhs : Int) -> Int {
@@ -57,5 +81,17 @@ class Calculator {
     
     func avg (_ values : [Int]) -> Float {
         return Float(add(values) / values.count)
+    }
+    
+    func mathOp (lhs : Int, rhs : Int, op : (Int, Int) -> Int) -> Int {
+        return Int(op(lhs, rhs))
+    }
+    
+    func mathOp (args: [Int], beg: Int, op: (Int, Int) -> Int) -> Int {
+        var total = op(beg, args[0])
+        for index in 0...(args.count - 2) {
+            total = op(total, args[index + 1])
+        }
+        return total
     }
 }
